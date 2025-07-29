@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+        
+        .container::after {
+            content: "";
+            position: absolute;
+            bottom: -70px;
+            right: -70px;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #a1c4fd, #c2e9fb);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .instructions {
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+        
+        .game-area {
+            margin: 30px 0;
+        }
+        
+        .input-group {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        #guess-input {
+            width: 120px;
+            padding: 15px;
+            font-size: 1.8rem;
+            text-align: center;
+            border: 3px solid #3498db;
+            border-radius: 12px 0 0 12px;
+            outline: none;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        #guess-input:focus {
+            border-color: #e74c3c;
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
+        }
+        
+        #submit-btn {
+            padding: 15px 25px;
+            background: linear-gradient(to right, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 0 12px 12px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #submit-btn:hover {
+            background: linear-gradient(to right, #2980b9, #3498db);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hint-area {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hint-title {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+        
+        #hint-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            min-height: 30px;
+            padding-top: 20px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 120px;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+        }
+        
+        .attempts-display {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .attempt {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+            font-weight: bold;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            font-size: 1.2rem;
+        }
+        
+        .attempt.correct {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: white;
+            transform: scale(1.2);
+        }
+        
+        .attempt.incorrect {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #reset-btn {
+            background: linear-gradient(to right, #e74c3c, #c0392b);
+            color: white;
+        }
+        
+        #new-game-btn {
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .win-animation {
+            animation: winPulse 1s infinite alternate;
+        }
+        
+        @keyframes winPulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); box-shadow: 0 0 30px rgba(46, 204, 113, 0.7); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: confetti-fall 5s linear forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(600px) rotate(720deg); opacity: 0; }
+        }
+        
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            #guess-input {
+                border-radius: 12px;
+                margin-bottom: 15px;
+                width: 90%;
+                font-size: 1.5rem;
+            }
+            
+            #submit-btn {
+                border-radius: 12px;
+                width: 90%;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 90%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guess the Number</h1>
+        
+        <p class="instructions">
+            I've selected a random number between 1 and 10. Try to guess it! 
+            I'll give you hints to help you find it. You have unlimited attempts!
+        </p>
+        
+        <div class="game-area">
+            <div class="input-group">
+                <input type="number" id="guess-input" min="1" max="10" placeholder="1-10">
+                <button id="submit-btn">Guess!</button>
+            </div>
+            
+            <div class="hint-area">
+                <div class="hint-title">HINT</div>
+                <div id="hint-text">Enter your first guess to begin!</div>
+            </div>
+            
+            <div class="attempts-display" id="attempts-container">
+                <!-- Attempt circles will be added here -->
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <div>Attempts</div>
+                <div class="stat-value" id="attempt-count">0</div>
+            </div>
+            <div class="stat-box">
+                <div>Last Guess</div>
+                <div class="stat-value" id="last-guess">-</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" id="reset-btn">Reset Game</button>
+            <button class="btn" id="new-game-btn">New Number</button>
+        </div>
+    </div>
+
+    <script>
+        // Game state variables
+        let targetNumber;
+        let attempts = 0;
+        let gameOver = false;
+        let previousGuesses = [];
+
+        // DOM elements
+        const guessInput = document.getElementById('guess-input');
+        const submitBtn = document.getElementById('submit-btn');
+        const hintText = document.getElementById('hint-text');
+        const attemptCount = document.getElementById('attempt-count');
+        const lastGuess = document.getElementById('last-guess');
+        const attemptsContainer = document.getElementById('attempts-container');
+        const resetBtn = document.getElementById('reset-btn');
+        const newGameBtn = document.getElementById('new-game-btn');
+
+        // Initialize game
+        function initGame() {
+            targetNumber = Math.floor(Math.random() * 10) + 1;
+            attempts = 0;
+            gameOver = false;
+            previousGuesses = [];
+            hintText.textContent = "Enter your first guess to begin!";
+            hintText.style.color = "#2c3e50";
+            attemptCount.textContent = "0";
+            lastGuess.textContent = "-";
+            attemptsContainer.innerHTML = "";
+            guessInput.value = "";
+            guessInput.disabled = false;
+            submitBtn.disabled = false;
+            document.querySelector('.container').classList.remove('win-animation');
+        }
+
+        // Generate hint based on user's guess
+        function generateHint(guess) {
+            const diff = Math.abs(targetNumber - guess);
+            
+            if (guess === targetNumber) {
+                return `Congratulations! You found the number ${targetNumber}!`;
+            }
+            
+            if (diff === 1) {
+                return "You're burning up! Very close!";
+            } else if (diff <= 2) {
+                return "You're getting warm!";
+            } else if (diff <= 4) {
+                return "You're lukewarm.";
+            } else {
+                return "You're cold. Try again!";
+            }
+        }
+
+        // Add attempt to visual display
+        function addAttemptToDisplay(guess, isCorrect) {
+            const attemptEl = document.createElement('div');
+            attemptEl.classList.add('attempt');
+            attemptEl.textContent = guess;
+            
+            if (isCorrect) {
+                attemptEl.classList.add('correct');
+            } else {
+                attemptEl.classList.add('incorrect');
+            }
+            
+            attemptsContainer.appendChild(attemptEl);
+            attemptEl.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Handle win condition
+        function handleWin() {
+            gameOver = true;
+            hintText.innerHTML = `🎉 <strong>Congratulations!</strong> 🎉<br>You found the number ${targetNumber} in ${attempts} attempts!`;
+            hintText.style.color = "#27ae60";
+            document.querySelector('.container').classList.add('win-animation');
+            guessInput.disabled = true;
+            submitBtn.disabled = true;
+            
+            // Create confetti effect
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                confetti.style.height = confetti.style.width;
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        // Handle guess submission
+        function submitGuess() {
+            if (gameOver) return;
+            
+            const guess = parseInt(guessInput.value);
+            
+            // Validate input
+            if (isNaN(guess)) {
+                hintText.textContent = "Please enter a valid number!";
+                hintText.style.color = "#e74c3c";
+                return;
+            }
+            
+            if (guess < 1 || guess > 10) {
+                hintText.textContent = "Please enter a number between 1 and 10!";
+                hintText.style.color = "#e74c3c";
+                return;
+            }
+            
+            // Process valid guess
+            attempts++;
+            previousGuesses.push(guess);
+            attemptCount.textContent = attempts;
+            lastGuess.textContent = guess;
+            
+            // Check if correct
+            const isCorrect = guess === targetNumber;
+            hintText.textContent = generateHint(guess);
+            hintText.style.color = isCorrect ? "#27ae60" : "#2c3e50";
+            addAttemptToDisplay(guess, isCorrect);
+            
+            // Handle correct guess
+            if (isCorrect) {
+                handleWin();
+            }
+            
+            guessInput.value = "";
+            guessInput.focus();
+        }
+
+        // Event listeners
+        submitBtn.addEventListener('click', submitGuess);
+        
+        guessInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                submitGuess();
+            }
+        });
+        
+        resetBtn.addEventListener('click', initGame);
+        
+        newGameBtn.addEventListener('click', function() {
+            initGame();
+            hintText.textContent = "New number generated! Start guessing!";
+            hintText.style.color = "#2c3e50";
+        });
+
+        // Initialize game on load
+        document.addEventListener('DOMContentLoaded', initGame);
+    </script>
+</body>
+</html>
