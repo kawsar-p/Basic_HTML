@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Web Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #001510);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(45deg, #ff8a00, #e52e71, #22c1c3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300% 300%;
+            animation: gradient 8s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            width: 300px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff8a00, #e52e71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .interactive-section {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #ff8a00, #e52e71);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .color-preview {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #ff8a00, #e52e71);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+        }
+        
+        .counter {
+            font-size: 5rem;
+            margin: 30px 0;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .slider-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 40px auto;
+        }
+        
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ff8a00;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .value-display {
+            font-size: 1.2rem;
+            margin-top: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .interactive-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HTML, CSS & JavaScript</h1>
+            <p class="subtitle">A demonstration of modern web technologies working together to create interactive experiences</p>
+        </header>
+        
+        <div class="features">
+            <div class="feature-card">
+                <i class="fab fa-html5"></i>
+                <h3>HTML5</h3>
+                <p>The backbone of web content, providing structure and meaning to your pages.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fab fa-css3-alt"></i>
+                <h3>CSS3</h3>
+                <p>Styling magic that brings your content to life with beautiful designs and animations.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fab fa-js"></i>
+                <h3>JavaScript</h3>
+                <p>The programming language that makes your website interactive and dynamic.</p>
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h2>Interactive Demo</h2>
+            <p>See how JavaScript interacts with HTML and CSS in real-time</p>
+            
+            <div class="controls">
+                <button id="colorBtn">Change Color</button>
+                <button id="counterBtn">Increment Counter</button>
+                <button id="resetBtn">Reset Counter</button>
+            </div>
+            
+            <div class="counter" id="counter">0</div>
+            
+            <div class="color-preview" id="colorPreview"></div>
+            
+            <div class="slider-container">
+                <h3>Adjust Size</h3>
+                <input type="range" min="50" max="300" value="200" class="slider" id="sizeSlider">
+                <div class="value-display">Size: <span id="sizeValue">200px</span></div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Created with HTML, CSS and JavaScript | Modern Web Technologies</p>
+        </footer>
+    </div>
+
+    <script>
+        // DOM Elements
+        const colorBtn = document.getElementById('colorBtn');
+        const counterBtn = document.getElementById('counterBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const counterDisplay = document.getElementById('counter');
+        const colorPreview = document.getElementById('colorPreview');
+        const sizeSlider = document.getElementById('sizeSlider');
+        const sizeValue = document.getElementById('sizeValue');
+        
+        // Counter state
+        let count = 0;
+        
+        // Color changer function
+        colorBtn.addEventListener('click', () => {
+            const randomColor1 = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+            const randomColor2 = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+            
+            colorPreview.style.background = `linear-gradient(45deg, ${randomColor1}, ${randomColor2})`;
+            colorPreview.style.boxShadow = `0 8px 25px ${randomColor1}80`;
+        });
+        
+        // Counter functionality
+        counterBtn.addEventListener('click', () => {
+            count++;
+            counterDisplay.textContent = count;
+            
+            // Add animation effect
+            counterDisplay.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                counterDisplay.style.transform = 'scale(1)';
+            }, 300);
+        });
+        
+        // Reset counter
+        resetBtn.addEventListener('click', () => {
+            count = 0;
+            counterDisplay.textContent = count;
+            
+            // Add animation effect
+            counterDisplay.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                counterDisplay.style.transform = 'scale(1)';
+            }, 300);
+        });
+        
+        // Size slider functionality
+        sizeSlider.addEventListener('input', () => {
+            const size = sizeSlider.value;
+            colorPreview.style.width = `${size}px`;
+            colorPreview.style.height = `${size}px`;
+            sizeValue.textContent = `${size}px`;
+        });
+        
+        // Initialize with a random gradient
+        window.onload = () => {
+            const randomColor1 = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+            const randomColor2 = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+            colorPreview.style.background = `linear-gradient(45deg, ${randomColor1}, ${randomColor2})`;
+            colorPreview.style.boxShadow = `0 8px 25px ${randomColor1}80`;
+        };
+    </script>
+</body>
+</html>
