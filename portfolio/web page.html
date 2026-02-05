@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      font-family: 'Times New Roman', Times, serif;
+      text-decoration: none;
+    }
+    body{
+      max-width: 1300px;
+    }
+    #navbar{
+      height: 60px;
+      background: #0f1111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 5px;
+      border-top-right-radius: 10px ;
+      border-bottom-right-radius: 10px;
+    }
+    #logo{
+      color: orange;
+      font-size: 25px;
+    }
+    a{
+      margin-right: 140px;
+      color: white;
+    }
+    button{
+      background: orange;
+      border: 1px solid #0f1111;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      height: 30px;
+      width: 60px;
+      margin-left: -60px;
+    }
+    .search-box{
+      border: 1px solid #0f1111;
+      border-radius: 10px;
+      height: 30px;
+      width: 400px;
+      padding: 5px 5px;
+      color: black;
+      margin-left: 30px ;
+    }
+
+    .inline-box{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap:10px;
+
+    }
+    #text{
+      background: salmon;
+      display: inline-block;
+      margin-top: 10px;
+      text-align: justify;
+      width: 280px;
+      padding: 10px;
+      border: 2px double black;
+      border-radius: 10px;
+    }
+
+    #box-me{
+      height: 900px;
+      max-width: 1300px;
+      border: 3px double black;
+      margin-top: 10px;
+      margin: 10px 10px;
+      border-radius: 10px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      padding: 10px;
+      background-color: lavender;
+    }
+    #side-bar{
+      height:880px;
+      width: 500px;
+      background-color: gainsboro;
+      border: 3px double black;
+      padding: 10px 10px;
+      border-radius: 10px;
+      background-image: url("https://c4.wallpaperflare.com/wallpaper/507/606/546/egor-klyuchnyk-digital-art-illustration-artwork-fictional-characters-hd-wallpaper-preview.jpg");
+      background-size: cover;
+    }
+    #top-navbar{
+     flex:1;
+     display:flex;
+     flex-direction:column;
+     gap: 10px;
+     margin-left: 10px;
+    }
+    #top-box{
+      align-items: start;
+      height: 250px;
+      width: 820px;
+      border: 3px transparent black;
+      border-radius: 10px;
+      box-shadow: 0px 0px 5px gray;
+      background-color: pink;
+      background-image: url("cover.jpg");
+      background-size: cover;
+    }
+    #midle-box-container{
+      height: 620px;
+      width: 800px;
+      border: 3px transparent black;
+      border-radius: 10px;
+      background-color: lavender;
+      padding: 10px;
+      box-shadow: 0px 0px 5px gray;
+    }
+
+    #second-right-bar{
+      height:300px;
+      background-color: gainsboro;
+      border: 3px transparent black;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 5px gray;
+      background-image: url("https://c4.wallpaperflare.com/wallpaper/122/29/89/anime-one-piece-brook-one-piece-franky-one-piece-wallpaper-preview.jpg");
+      background-size: cover;
+    }
+
+    #box5{
+      height: 290px;
+      border: 0px transparent black;
+      border-radius: 10px;
+      margin-top: 10px;
+      background-color: lavender;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0px 0px 5px gray;
+    }
+
+    #box6{
+      height: 280px;
+      width: 330px;
+      border: 0px transparent black;
+      border-radius: 10px;
+      margin: 5px;
+      background-image: url("https://c4.wallpaperflare.com/wallpaper/572/642/430/one-piece-monkey-d-luffy-gear-5th-sun-god-nika-hd-wallpaper-preview.jpg");
+      background-size: cover;
+    }
+    
+      #box7{
+      height: 280px;
+      width: 530px;
+      border: 0px transparent black;
+      border-radius: 10px;
+      margin: 5px;
+      background-image: url("https://c4.wallpaperflare.com/wallpaper/923/720/848/anime-one-piece-monkey-d-luffy-nami-one-piece-wallpaper-preview.jpg");
+      background-size: cover;
+    }
+
+    footer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      max-width: 1300px;
+      margin: 10px;
+      text-align: center;
+      color: gray;
+      border: 3px double black;
+      border-radius: 10px;
+      position: sticky;
+      padding: 10px;
+    }
+    
+  </style>
+
+</head>
+<body>
+  <div id="navbar">
+    <a id="logo" href="https://www.amazon.com/" target="_blank">Amazon</a>
+    <a>Account</a>
+    <a>My Cart</a>
+    <a>Contact us</a>
+    <input class="search-box" type="search" placeholder="Apple...">
+    <button>Submit</button>
+  </div>
+
+  <div class="inline-box">
+    <p id="text">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Reprehenderit dicta in molestiae asperiores officiis
+      provident cumque quo quasi tenetur totam sapiente praesentium
+      assumenda adipisci magni mollitia vero, iure cum necessitatibus?
+    </p>
+    <p id="text" style="background: plum;">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Reprehenderit dicta in molestiae asperiores officiis
+      provident cumque quo quasi tenetur totam sapiente praesentium
+      assumenda adipisci magni mollitia vero, iure cum necessitatibus?
+    </p>
+
+    <p id="text" style="background: lavender">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Reprehenderit dicta in molestiae asperiores officiis
+      provident cumque quo quasi tenetur totam sapiente praesentium
+      assumenda adipisci magni mollitia vero, iure cum necessitatibus?
+    </p>
+
+    <p id="text" style="background: skyblue">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Reprehenderit dicta in molestiae asperiores officiis
+      provident cumque quo quasi tenetur totam sapiente praesentium
+      assumenda adipisci magni mollitia vero, iure cum necessitatibus?
+    </p>
+  </div>
+
+  <div id="box-me">
+    <div id="side-bar"></div>
+    <div id="top-navbar">
+      <div id="top-box"></div>
+      <div id="midle-box-container">
+        <div id="second-right-bar"></div>
+        <div id="box5">
+          <div id="box6"></div>
+          <div id="box7"></div>
+          <div id="box8"></div>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>&copy; 2026 This webpage made for practice </footer>
+
+  
+</body>
+</html>
