@@ -3,119 +3,222 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flex Box</title>
+  <title>Responsive Flexbox</title>
+
   <style>
     *{
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+
     body{
-      display: inline;
-      justify-content: center;
-      align-items: center;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
     }
 
+    /* NAVBAR */
+    .navbar{
+      background-color: #0f0000;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 15px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .navbar li a{
+      color: orange;
+      font-size: 1.3rem;
+      text-decoration: none;
+      padding: 5px 10px;
+    }
+
+    /* HEADER */
     header{
-      height: 200px;
-      max-width: auto;
-      border: 5px double black;
-      border-radius: 10px;
+      height: 160px;
       margin: 10px;
       background-color: lavender;
+      border: 4px double black;
+      border-radius: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 40px;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
       letter-spacing: 30px;
+      text-align: center;
     }
 
+    /* MAIN LAYOUT */
     .container{
-      height: 600px;
-      width: auto;
-      border: transparent;
-      border-radius: 10px;
-      background-color: lavender;
       display: flex;
+      gap: 10px;
       margin: 10px;
+      flex-wrap: wrap;
     }
 
-    .Right-bar{
+    /* SIDEBAR */
+    .right-bar{
+      flex: 1 1 220px;
+      max-width: 260px;
       display: flex;
-      justify-content: space-evenly;
       flex-direction: column;
-      height: 600px;
-      width: 250px;
-      border: 1px transparent black;
-      position: sticky;
+      gap: 10px;
+      top: 10px;
     }
 
-    #box{
-      height: 100px;
-      width: 230px;
+    .side-box{
+      height: 90px;
       border: 2px solid black;
-      margin: 10px;
-      display: flex;
+      background-color: white;
     }
 
+    /* CONTENT */
     .blank-box{
-      height: 580px;
-      width: 1200px;
+      flex: 3 1 300px;
       border: 1px solid black;
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      margin: 10px;
       border-radius: 10px;
-      flex-direction: column;
-      flex-wrap:wrap-reverse;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 15px;
     }
 
-    #box6{
-      height: 100px;
-      width: 100px;
+    .content-box{
+      width: 220px;
+      height: 220px;
       border: 1px solid black;
-      margin: 10px;
     }
 
+    /* BACK TO TOP */
+    #top-class{
+      display: flex;
+      justify-content: center;
+      margin: 15px;
+    }
+
+    #top a{
+      background-color: rgb(117, 4, 14);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1.2rem;  
+      animation: myanimation;
+      animation-duration: 0.3s;
+      animation-delay: 1s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes myanimation{
+      from{background-color: rgb(117, 4, 14);}
+      to {background-color: rgb(221,153,51);}
+    }
+
+    #top a:hover{
+      background-color: rgb(221,153,51);
+      color: black;
+    }
+
+    /* FOOTER */
     footer{
       height: 50px;
-      max-width: auto;
-      border: 5px double black;
-      border-radius: 10px;
       margin: 10px;
       background-color: lavender;
+      border: 4px double black;
+      border-radius: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
+      text-align: center;
     }
+
+    /* 📱 MOBILE */
+    @media (max-width: 768px){
+      .navbar{
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .container{
+        flex-direction: column;
+      }
+
+      .right-bar{
+        max-width: 100%;
+        position: static;
+      }
+
+      .content-box{
+        width: 100%;
+        max-width: 300px;
+      }
+
+      header{
+        letter-spacing: 4px;
+      }
+    }
+
+    /* 📱 EXTRA SMALL */
+    @media (max-width: 480px){
+      .navbar li a{
+        font-size: 1.1rem;
+      }
+
+      header{
+        height: auto;
+        padding: 20px;
+      }
+    }
+
   </style>
 </head>
+
 <body>
 
-<header>FLEX BOX</header>
+  <ul class="navbar">
+    <li><a href="#">Menu</a></li>
+    <li><a href="#">Account</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">Help</a></li>
+  </ul>
+
+  <header>FLEX BOX</header>
 
   <div class="container">
-  <div class="Right-bar">
-  <div id="box"></div>
-  <div id="box"></div>
-  <div id="box"></div>
-  <div id="box"></div>
-  <div id="box"></div>
-  </div>
-  <div class="blank-box">
-    <div id="box6" style="background-color: pink;"></div>
-    <div id="box6" style="background-color: salmon;"></div>
-    <div id="box6" style="background-color: skyblue;"></div>
-    <div id="box6" style="background-color: aquamarine;"></div>
 
-    <div id="box6" style="background-color: pink;"></div>
-    <div id="box6" style="background-color: salmon;"></div>
-    <div id="box6" style="background-color: skyblue;"></div>
-    <div id="box6" style="background-color: aquamarine;"></div>    
-  </div>
-</div>
+    <div class="right-bar">
+      <div class="side-box"></div>
+      <div class="side-box"></div>
+      <div class="side-box"></div>
+      <div class="side-box"></div>
+      <div class="side-box"></div>
+    </div>
 
-<footer><p>© 2026 All Rights Reserved</p></footer>
-  
+    <div class="blank-box">
+      <div class="content-box" style="background:pink;"></div>
+      <div class="content-box" style="background:salmon;"></div>
+      <div class="content-box" style="background:skyblue;"></div>
+      <div class="content-box" style="background:aquamarine;"></div>
+      <div class="content-box" style="background:pink;"></div>
+      <div class="content-box" style="background:salmon;"></div>
+      <div class="content-box" style="background:skyblue;"></div>
+      <div class="content-box" style="background:aquamarine;"></div>
+    </div>
+
+  </div>
+
+  <div id="top-class">
+    <div id="top">
+      <a href="#">↑ Top</a>
+    </div>
+  </div>
+
+  <footer>© 2026 All Rights Reserved</footer>
+
 </body>
 </html>
