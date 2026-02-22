@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    header{
+      height: 100px;
+      border: 1px solid black;
+      padding: 20px;
+      border-radius: 10x;
+      margin-bottom: 10px;
+    }
+    body{
+      background-color: #fff;
+    }
+
+    .container{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .right-bar{
+      flex: 1 1 220px;
+      max-width: 260px;
+      height: 400px;
+      border: 1px solid black;
+      margin-bottom: 10px;
+    }
+
+    .content{
+      flex: 3 1 300px;
+      min-height: 400px;
+      border: 1px solid black;
+      margin-bottom: 10px;
+    }
+    #arrow{
+      position: fixed;
+      padding: 10px;
+      border: 1px solid black;
+      border-radius: 50%;
+      width:15px;
+      text-align: center;
+      background-color: grey;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    #arrow:hover{
+      background-color: #fff;
+      cursor: pointer;
+    }
+
+    footer{
+      text-align: center;
+      padding: 20px;
+      border: 1px solid black;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+  <header></header>
+  <body>
+    <div class="container">
+      <div class="right-bar"></div>
+      <div class="content"></div>
+    </div>
+    <p id="arrow" onclick="window.scrollTo({top:0, behavior:'smooth'})">&UpArrow;</p>
+  </body>
+
+  <footer>&copy; Copyright 2026. This website is Reserved.</footer>
+</html>
